@@ -44,7 +44,7 @@ Sub Chat()
 
 
   Dim strAPIKey As String
-  strAPIKey = Environ("OPENAI_API_KEY")
+  strAPIKey = Environ("OPENAI_API_KEY")  '可以直接写key：xxx(双引号)
   
   Dim strURL As String
   strURL = "https://api.openai.com/v1/chat/completions"
@@ -76,7 +76,7 @@ Sub Chat()
   
 
   Dim objCurlHttp As Object
-  Set objCurlHttp = CreateObject("MSXML2.serverXMLHTTP")
+  Set objCurlHttp = CreateObject("MSXML2.XMLHTTP")
 
   With objCurlHttp
     .Open "POST", strURL, False
@@ -105,7 +105,7 @@ Sub Chat()
     
     
     Dim intStartPos As Integer
-    intStartPos = InStr(1, strResponse, Chr(34) & "content" & Chr(34)) + 11
+    intStartPos = InStr(1, strResponse, Chr(34) & "content" & Chr(34)) + 12
 
     
 
@@ -115,7 +115,7 @@ Sub Chat()
     End If
     
     Dim intEndPos As Integer
-    intEndPos = InStr(1, strResponse, Chr(34) & "finish_reason" & Chr(34)) - 3
+    intEndPos = InStr(1, strResponse, Chr(34) & "finish_reason" & Chr(34)) - 17
 
     
     Dim intLength As Integer
